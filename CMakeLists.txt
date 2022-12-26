@@ -102,7 +102,6 @@ PUBLIC
     -lrbdl
     -lrbdl_urdfreader
     -lpthread
-    -lqpOASES
     -lpython3.8
     pybind11::pybind11
     ${OMPL_LIBRARIES}

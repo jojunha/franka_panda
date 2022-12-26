@@ -118,7 +118,7 @@ void CController::control_mujoco()
 			_start_time = _init_t;
 			_end_time = _start_time + _motion_time;
 			HandTrajectory.reset_initial(_start_time, _x_hand, _xdot_hand);
-			HandTrajectory.update_goal(_x_goal_hand, _xdot_goal_hand, _end_time);
+			HandTrajectory.update_goal(_x_goal_hand, _xdot_goal_hand, _end_time); 
 			_bool_ee_motion = true;
 		}
 
@@ -140,6 +140,8 @@ void CController::control_mujoco()
 		}
 	}
 }
+
+
 
 void CController::ModelUpdate()
 {
@@ -169,15 +171,9 @@ void CController::motionPlan()
 	if (_bool_plan(_cnt_plan) == 1)
 	{
 		_cnt_plan = _cnt_plan + 1;
-		for(int i = 0; i < 6; i++){
-			cout << _x_hand(i) << "  ";
-		}
-		std::cout << "cnt : " << _cnt_plan << std::endl;
-		cout << endl;
 
 		if(_cnt_plan == 1)
 		{	
-			// _q_home = txt_position.block<1, 7>(0, 0);
 			reset_target(_time_plan(_cnt_plan), _q_home);
 		}
 		else if (_cnt_plan == 2)
@@ -219,6 +215,7 @@ void CController::motionPlan()
 		}	
 	}
 }
+
 
 void CController::reset_target(double motion_time, VectorXd target_joint_position)
 {
